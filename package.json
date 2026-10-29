@@ -3,11 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "desktop/main.cjs",
   "description": "A little companion that picks up meeting busywork for product managers.",
   "scripts": {
+    "postinstall": "install-electron",
     "start": "node --env-file-if-exists=.env server.mjs",
     "dev": "node --watch --env-file-if-exists=.env server.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "desktop": "node scripts/run-desktop.mjs",
+    "desktop:package": "node scripts/package-desktop.mjs"
   },
-  "engines": { "node": ">=22.9.0" }
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "@electron/packager": "20.3.0",
+    "electron": "45.1.0"
+  }
 }

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'">
+  <title>Pip · Meeting studio</title>
+  <link rel="stylesheet" href="meeting.css">
+  <script type="module" src="meeting.js"></script>
+</head>
+<body>
+  <header class="titlebar"><span>PIP / MEETING STUDIO</span><button id="hide-window" title="Hide this window; recording continues">Back to little Pip ↗</button></header>
+  <main>
+    <section class="welcome"><div><div class="eyebrow">BE HERE. I'LL TAKE THE NOTES.</div><h1>A little room to listen.</h1><p>Capture the conversation. Leave the loose ends with Pip.</p></div><img src="../extension/assets/pip.svg" width="82" height="82" alt="Pip"></section>
+    <div id="config-banner" class="notice" hidden></div>
+    <section class="recorder" aria-labelledby="recorder-heading">
+      <div class="recorder-heading"><div><h2 id="recorder-heading">Your next conversation</h2><p id="recording-caption">Microphone + computer audio, together in one place.</p></div><span id="recording-state" class="state-pill">Ready when you are</span></div>
+      <div class="recording-controls"><div class="source-select"><label for="audio-source">Audio source</label><select id="audio-source"><option value="both">Microphone + computer sound</option><option value="mic">Microphone only</option></select></div><div class="timer" id="timer" aria-label="Recording duration">00:00</div><button class="button record-button" id="start-recording"><span class="record-dot"></span>Start meeting</button><button class="button stop-button" id="stop-recording" hidden><span class="stop-square"></span>Stop recording</button></div>
+      <div class="meters"><div class="meter-row"><span>Microphone</span><meter id="microphone-meter" min="0" max="1" value="0" aria-label="Microphone audio level"></meter><span id="mic-level-label">Waiting</span></div><div class="meter-row"><span>Computer sound</span><meter id="system-meter" min="0" max="1" value="0" aria-label="Computer audio level"></meter><span id="system-level-label">Waiting</span></div></div>
+      <label class="transcribe-option"><input type="checkbox" id="transcribe-enabled" checked><span>Transcribe as we go <small>Updates about every 20 seconds, plus processing time</small></span></label>
+      <p class="recording-note">Let everyone know before recording. With transcription enabled, audio is sent to OpenAI. Computer sound can include audio from other apps. Headphones help avoid echo.</p>
+      <div class="notice warning" id="capture-warning" role="status" hidden></div>
+      <div class="notice error" id="capture-error" role="alert" hidden></div>
+    </section>
+    <nav class="tabs" aria-label="Meeting content"><button class="tab active" data-tab="transcript">Conversation <span id="segment-count">0</span></button><button class="tab" data-tab="tasks">Your little tasks <span id="task-count">0</span></button><span class="autosave" id="save-state">Transcript saved on this device</span></nav>
+    <section id="transcript-panel">
+      <div class="section-heading"><div><h2>Words into headspace.</h2><p id="transcript-status">Start a meeting to capture the words. Your transcript will appear here.</p></div><button class="text-button" id="new-meeting">New meeting</button></div>
+      <div id="queue-status" class="queue-status" hidden><span id="queue-label"></span><button class="text-button" id="retry-transcription" hidden>Retry failed segments</button></div>
+      <label class="sr-only" for="transcript-editor">Meeting transcript — editable after transcription finishes</label><textarea id="transcript-editor" rows="12" placeholder="No notes to upload. Just press Start meeting.&#10;&#10;You can edit the transcript here once recording and transcription finish."></textarea>
+      <div class="transcript-footer"><div class="export-actions"><button class="button secondary" id="save-transcript">Save transcript</button><button class="button secondary" id="save-audio">Save audio</button></div><div class="analysis-action"><label class="sr-only" for="summary-mode">Summary mode</label><select id="summary-mode"><option value="ai">AI summary</option><option value="demo">Local rules demo</option></select><button class="button primary" id="find-tasks">Find the little things →</button></div></div>
+      <p class="small-note" id="audio-note">Audio stays in memory until you save it. Save audio before quitting if you want to keep the recording. One-hour limit per recording.</p>
+    </section>
+    <section id="tasks-panel" hidden><div class="section-heading"><div><h2 id="meeting-summary-title">Your meeting, a little clearer.</h2><p>Review each suggestion. Your judgment comes first.</p></div></div><div id="meeting-summary" class="summary-grid"></div><div id="task-list" class="task-list"></div><p class="small-note">Approval prepares a local draft. Email, calendar, and message sending are not connected.</p></section>
+    <footer><span>Big ideas are yours. The little things? Mine.</span><button class="text-button" id="settings-button">Setup & permissions</button></footer>
+  </main>
+  <dialog id="review-dialog"><div id="review-content"></div></dialog>
+  <dialog id="settings-dialog" aria-labelledby="settings-title"><div class="dialog-header"><h2 id="settings-title">A little setup.</h2><button class="icon-button close-dialog" aria-label="Close">×</button></div><div class="settings-copy"><p><strong>1. Connect transcription</strong><br>Copy <code>.env.example</code> to <code>.env</code> and set <code>OPENAI_API_KEY</code>. Restart Pip after saving. The key stays in the desktop process.</p><p id="config-path"></p><p><strong>2. Allow microphone and computer audio</strong><br>macOS asks when you start recording. If needed, check System Settings → Privacy & Security → Microphone and Screen & System Audio Recording. When running from an IDE, macOS may attribute access to that IDE; the packaged Pip.app has its own permission descriptions.</p><p><strong>3. Check both meters</strong><br>Speak briefly and play sound from your meeting. Both meters should respond before you rely on the recording. A silent computer channel does not prove capture is working.</p><p><strong>How the transcript works</strong><br>Pip transcribes complete 20-second audio segments. This is periodic transcription, not word-by-word live captions. Speaker names are not identified automatically. Failed segments can be retried without recording again while this window's session remains open.</p><p><strong>Keeping your recording</strong><br>Transcript and task state are saved locally. Raw audio stays in memory until you choose Save audio. New meeting and Quit discard unsaved audio.</p><div id="config-status"></div></div></dialog>
+  <dialog id="new-meeting-dialog" aria-labelledby="new-title"><h2 id="new-title">Make room for a new conversation?</h2><p class="dialog-copy">This replaces the current transcript and task list, and discards audio still in memory. Save anything you want to keep first.</p><div class="dialog-actions"><button class="button secondary close-dialog">Keep this meeting</button><button class="button primary" id="confirm-new-meeting">Start fresh</button></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

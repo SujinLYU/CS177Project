@@ -1,0 +1,64 @@
+/* A compact extension surface; the draggable companion is on the active page. */
+:root { font-size: 14px; }
+body { min-width: 280px; }
+.panel-header { display: flex; align-items: center; gap: 10px; padding: 16px 16px 12px; }
+.panel-header .brand { font-size: 30px; letter-spacing: -2px; gap: 2px; }
+.panel-header .brand img { width: 34px; height: 34px; }
+.panel-label { font-size: 8px; line-height: 1.6; letter-spacing: 1px; max-width: 88px; color: #728168; }
+.panel-header .mode-pill { margin-left: auto; font-size: 10px; white-space: nowrap; }
+.panel-navigation { display: flex; flex-direction: row; gap: 5px; padding: 0 14px 12px; border-bottom: 1px solid var(--line); margin: 0; }
+.panel-navigation .nav-item { padding: 10px 11px; font-size: 12px; gap: 7px; flex: 1; justify-content: center; }
+.panel-navigation .nav-count { margin-left: 0; }
+.panel-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px 0; }
+.panel-toolbar > span { font-size: 12px; color: #77846e; }
+.panel-toolbar .button { font-size: 11px; padding: 9px 12px; }
+main { padding: 15px 16px 20px; max-width: none; }
+.panel-greeting { display: flex; align-items: flex-start; gap: 12px; padding: 17px 13px; border: 1px solid #e0e8d5; border-radius: 13px; background: #edf2e5; }
+.panel-greeting img { flex-shrink: 0; width: 58px; height: 58px; }
+.panel-greeting h1 { font-family: inherit; font-size: 17px; letter-spacing: -.5px; font-weight: 550; line-height: 1.4; }
+.panel-greeting h1 br { display: none; }
+.panel-greeting p { font-size: 11px; line-height: 1.7; color: #6f7e63; margin-top: 6px; }
+.panel-greeting .text-button { margin-top: 9px; font-size: 11px; color: #4f6c3d; }
+.stats { gap: 8px; margin: 12px 0 22px; }
+.stat { padding: 12px 8px; display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.stat strong { font-size: 19px; }
+.stat > span { color: #75816a; font-size: 10px; }
+.section-heading { margin-bottom: 12px; }
+.section-heading h2 { font-size: 16px; }
+.filters { gap: 3px; }
+.filter { font-size: 11px; padding: 7px 9px; }
+.task-card { padding: 15px 12px; }
+.task-card h3 { font-size: 13px; }
+.task-description { font-size: 11px; color: #77816d; }
+.task-footer { margin-left: 0; flex-wrap: wrap; }
+.task-meta { font-size: 10px; }
+.review-button { font-size: 11px; padding: 8px 11px; }
+.footnote { font-size: 9px; color: #89937f; line-height: 1.6; }
+.context-column { display: flex; flex-direction: column; gap: 12px; padding-top: 21px; }
+.context-card { padding: 16px; }
+.card-kicker { font-size: 9px; }
+.summary-list { font-size: 11px; color: #758169; }
+.focus-item { font-size: 11px; }
+.focus-item span { font-size: 10px; }
+.focus-card .subtle { font-size: 10px; }
+.panel-footer { display: flex; align-items: flex-start; gap: 9px; margin-top: 22px; padding: 15px 2px 0; border-top: 1px solid var(--line); color: #819172; font-size: 10px; line-height: 1.7; }
+.panel-footer .icon { width: 14px; height: 14px; margin-top: 2px; }
+.secondary-view { min-height: 55vh; }
+.secondary-view h1 { font-size: 27px; }
+dialog { width: calc(100% - 20px); padding: 19px; max-height: calc(100vh - 24px); }
+.dialog-heading h2 { font-size: 23px; }
+.dialog-description, .info-content p { font-size: 12px; }
+.field-label { font-size: 12px; }
+.source-quote { font-size: 12px; }
+.review-note, .subtle { font-size: 11px; }
+.dialog-footer { gap: 12px; }
+.dialog-footer .button { font-size: 12px; }
+.toast { bottom: 18px; width: calc(100% - 32px); font-size: 12px; }
+@media (max-width: 340px) {
+  .panel-label { display: none; }
+  .panel-navigation .nav-item { padding: 9px 6px; font-size: 11px; }
+  .panel-greeting { gap: 8px; padding: 13px 10px; }
+  .panel-greeting img { width: 44px; height: 44px; }
+  .panel-greeting h1 { font-size: 16px; }
+  .filter { font-size: 10px; padding: 7px; }
+}

@@ -1,0 +1,11 @@
+main { max-width: 700px; padding: 48px 25px; }
+h1 { font-size: 33px; margin: 12px 0 20px; letter-spacing: -.8px; }
+p, li { font-size: 14px; line-height: 1.9; color: #62725b; }
+.intro { margin-bottom: 25px; }
+ol { padding-left: 24px; }
+li { padding-left: 6px; margin-bottom: 16px; }
+code { background: #e9eee1; padding: 3px 6px; border-radius: 4px; color: #3e5e33; font-size: 12px; overflow-wrap: anywhere; }
+.note { border: 1px solid #dce5ce; border-radius: 12px; background: #edf3e4; padding: 18px; margin: 25px 0; }
+.note p { margin-top: 10px; font-size: 12px; }
+.links { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 28px; }
+.links .text-button { font-size: 12px; }

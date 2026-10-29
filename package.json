@@ -1,0 +1,13 @@
+{
+  "name": "pip-pm-companion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A little companion that picks up meeting busywork for product managers.",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "dev": "node --watch --env-file-if-exists=.env server.mjs",
+    "test": "node --test"
+  },
+  "engines": { "node": ">=22.9.0" }
+}

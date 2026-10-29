@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-surface="extension">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#eef4ec">
+    <title>Pip · Meeting companion</title>
+    <link rel="icon" type="image/svg+xml" href="assets/pip.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sidepanel.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to tasks</a>
+    <header class="panel-header">
+      <a class="brand" href="sidepanel.html" aria-label="Pip home"><img src="assets/pip.svg" alt="" width="35" height="35"><span>pip<span class="brand-dot">.</span></span></a>
+      <span class="panel-label">YOUR MEETING SIDEKICK</span>
+      <button class="mode-pill" id="mode-info"><span class="status-dot"></span><span id="mode-label">Local demo</span></button>
+    </header>
+    <nav id="navigation" class="panel-navigation" aria-label="Companion navigation">
+      <button class="nav-item active" data-view="inbox"><span data-icon="inbox"></span>My pocket<span class="nav-count" id="nav-count">0</span></button>
+      <button class="nav-item" data-view="meetings"><span data-icon="notes"></span>Notes</button>
+      <button class="nav-item" data-view="activity"><span data-icon="activity"></span>Activity</button>
+    </nav>
+    <div class="panel-toolbar"><span id="breadcrumb-view">My pocket</span><button class="button button-dark" id="add-meeting"><span data-icon="plus"></span>Add meeting notes</button></div>
+    <main id="main" tabindex="-1">
+      <div id="inbox-view">
+        <section class="panel-greeting" aria-label="Pip's update">
+          <img src="assets/pip.svg" alt="Pip, your little work companion" width="64" height="64">
+          <div><h1 id="hero-title">A few little things for you.</h1><p id="hero-description">Your meeting follow-ups, ready to review.</p><button class="text-button" id="review-next">Review the next task <span data-icon="arrow"></span></button></div>
+        </section>
+        <section class="stats" aria-label="Task overview">
+          <div class="stat"><strong id="stat-pending">0</strong><span>to review</span></div>
+          <div class="stat"><strong id="stat-ready">0</strong><span>drafts ready</span></div>
+          <div class="stat"><strong id="stat-time">0 min</strong><span>est. effort*</span></div>
+        </section>
+        <section class="task-section" aria-labelledby="task-heading">
+          <div class="section-heading"><h2 id="task-heading">In your pocket <span id="pocket-count">0</span></h2></div>
+          <div class="filters" role="group" aria-label="Filter tasks"><button class="filter active" data-filter="suggested">To review <span id="pending-count">0</span></button><button class="filter" data-filter="completed">Drafts ready <span id="ready-count">0</span></button><button class="filter" data-filter="dismissed">Dismissed</button></div>
+          <div id="task-list" class="task-list"></div>
+          <p class="footnote">*Illustrative manual effort, not measured time savings.</p>
+        </section>
+        <aside class="context-column">
+          <section class="context-card meeting-card"><div class="card-kicker"><span data-icon="notes"></span>FROM YOUR MEETING</div><h3 id="meeting-title"></h3><span class="tag tag-muted" id="analysis-label">RULE-BASED DEMO</span><ul id="summary-list" class="summary-list"></ul><button class="text-button" id="view-notes">See meeting notes <span data-icon="arrow"></span></button></section>
+          <section class="context-card focus-card"><div class="card-kicker"><span data-icon="sparkle"></span>KEEP YOUR FOCUS HERE</div><div id="focus-items"></div><p class="subtle">These need your judgment. Pip keeps them separate from the busywork.</p></section>
+        </aside>
+      </div>
+      <section id="meetings-view" class="secondary-view" hidden><h1>Meeting notes</h1><p class="page-subtitle">Your source transcript and key decisions.</p><div id="meeting-details"></div></section>
+      <section id="activity-view" class="secondary-view" hidden><h1>Activity</h1><p class="page-subtitle">Your approvals and local drafts. Nothing is sent automatically.</p><div id="activity-list"></div></section>
+      <footer class="panel-footer"><span data-icon="shield"></span><p>Review first. Approve second.<br>This starter prepares local drafts only.</p></footer>
+    </main>
+    <!-- The draggable pet lives on the webpage; keep shared preview hooks hidden. -->
+    <div id="pet-widget" hidden><span id="pet-bubble"></span><button id="pet-button" tabindex="-1"><span id="pet-count"></span></button></div>
+    <dialog id="meeting-dialog" aria-labelledby="meeting-dialog-title"><form id="meeting-form"><div class="dialog-heading"><div><div class="eyebrow">LET'S PICK UP THE LOOSE ENDS</div><h2 id="meeting-dialog-title">Tell Pip what happened.</h2></div><button type="button" class="icon-button close-dialog" aria-label="Close dialog">×</button></div><p class="dialog-description">Paste your meeting transcript or notes. Pip will separate the big decisions from the little follow-ups.</p><label class="field-label" for="transcript">Meeting transcript</label><textarea id="transcript" name="transcript" rows="10" maxlength="20000" placeholder="Alex: Let's focus on the onboarding experience…" required></textarea><div class="input-meta"><button type="button" class="text-button" id="load-sample">Use a sample meeting</button><span id="character-count">0 / 20,000</span></div><label class="field-label" for="analysis-mode">Analysis mode</label><select id="analysis-mode"><option value="demo">Local demo · simple rules, no API key</option><option value="ai">AI · use the configured local backend</option></select><p class="subtle" id="mode-description">Demo mode uses simple keyword rules. It is not a language model and may miss or misclassify tasks. Only the active meeting is kept in this prototype.</p><div id="form-error" class="form-error" role="alert" hidden></div><div class="dialog-footer"><span class="subtle">Review every suggestion before delegating.</span><button type="submit" class="button button-dark" id="analyze-button"><span data-icon="sparkle"></span>Find the little things</button></div></form></dialog>
+    <dialog id="review-dialog" aria-labelledby="review-dialog-title"><div id="review-content"></div></dialog>
+    <dialog id="info-dialog" aria-labelledby="info-title"><div class="dialog-heading"><h2 id="info-title">Meet your little teammate.</h2><button class="icon-button close-dialog" aria-label="Close dialog">×</button></div><div class="info-content"><p><strong>Pip finds the follow-ups hiding between the big decisions.</strong> Review the source, edit the draft, and approve its preparation.</p><p><strong>Local demo:</strong> a small rule-based extractor runs entirely in your browser. Your current meeting and drafts are stored on this device.</p><p><strong>Optional AI:</strong> start the local server with your API key configured, then select AI when adding a meeting. This sends the submitted transcript to the configured AI provider for analysis.</p><p><strong>What approval does:</strong> prepares a local text draft you can copy or download. Email, calendar, and Slack execution are future integrations.</p><p>In the extension, clicking the toolbar icon adds Pip to the current supported webpage. A browser pet stays inside the page; an across-app desktop pet is a later step.</p><button id="reset-workspace" class="button button-soft">Clear local data</button><p class="subtle">Clears this surface's saved meeting, tasks, and activity. The web preview and extension keep separate local data.</p></div></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

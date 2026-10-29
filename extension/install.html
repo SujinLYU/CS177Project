@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在 Chrome 中安装 Pip</title>
+    <link rel="icon" href="assets/pip.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="install.css">
+  </head>
+  <body>
+    <main>
+      <img src="assets/pip.svg" alt="Pip 小宠物" width="88" height="88">
+      <div class="eyebrow">PIP · CHROME EXTENSION</div>
+      <h1>把 Pip 放进浏览器。</h1>
+      <p class="intro">加载扩展后，Pip 会在你正在使用的网页里陪你，点击它就能打开任务侧边栏。演示模式不需要启动服务器。</p>
+      <ol>
+        <li>在 Chrome 地址栏输入 <code>chrome://extensions</code>。</li>
+        <li>开启右上角的 <strong>Developer mode / 开发者模式</strong>。</li>
+        <li>点击 <strong>Load unpacked / 加载已解压的扩展程序</strong>，选择本项目里的 <code>extension</code> 文件夹。这个文件夹内应当直接包含 <code>manifest.json</code>。</li>
+        <li>打开右上角拼图菜单，把 <strong>Pip</strong> 固定到工具栏。</li>
+        <li>进入一个普通网页，点击工具栏里的 Pip：网页上会出现可拖动的宠物，同时打开任务侧边栏。</li>
+      </ol>
+      <div class="note"><strong>加载的是 extension 文件夹，不是项目根目录。</strong><p>宠物不能出现在 Chrome 设置页、新标签页或 Chrome Web Store 等受限页面。刷新网页后，点击工具栏图标可以再次唤起。</p></div>
+      <p>当前版本可以分析示例会议、审核建议并准备本地草稿。真实 AI 模式需要另外启动本地服务并配置 API key，详见项目 README。</p>
+      <div class="links"><a class="button button-soft" href="index.html">返回网页预览</a><a class="text-button" href="https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked">Chrome 官方加载说明 ↗</a></div>
+    </main>
+  </body>
+</html>

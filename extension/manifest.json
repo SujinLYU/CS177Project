@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Pip \u00b7 Your little work companion",
+  "short_name": "Pip",
+  "version": "0.1.0",
+  "description": "Pick up the little tasks after a meeting. Review drafts and keep the important decisions yours.",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "http://localhost:4173/*",
+    "http://127.0.0.1:4173/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Pip and show your companion",
+    "default_icon": {
+      "16": "icons/pip-16.png",
+      "32": "icons/pip-32.png",
+      "48": "icons/pip-48.png",
+      "128": "icons/pip-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/pip-16.png",
+    "32": "icons/pip-32.png",
+    "48": "icons/pip-48.png",
+    "128": "icons/pip-128.png"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:4173 http://127.0.0.1:4173"
+  }
+}

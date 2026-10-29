@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>Pip</title>
+  <link rel="stylesheet" href="pet.css">
+  <script type="module" src="pet.js"></script>
+</head>
+<body>
+  <div class="pet-shell">
+    <div id="pet-status" class="bubble" role="status">A little more headspace.</div>
+    <button id="pet" title="Click to open · drag to move" aria-label="Open Pip. Drag to move across your desktop; arrow keys also move Pip."><img src="../extension/assets/pip.svg" alt="Pip" draggable="false"><span id="badge" hidden></span><span id="recording-light" hidden></span></button>
+    <div class="pet-actions"><button id="open" aria-label="Open meeting recorder">Meetings</button><button id="quit" aria-label="Quit Pip">×</button></div>
+  </div>
+</body>
+</html>

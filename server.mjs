@@ -91,7 +91,7 @@ export function validateAIResult(result, transcript) {
   };
 }
 
-async function analyzeWithAI(transcript, { apiKey, model, fetchImpl }) {
+export async function analyzeWithAI(transcript, { apiKey = process.env.OPENAI_API_KEY, model = process.env.OPENAI_MODEL || 'gpt-4o-mini', fetchImpl = fetch } = {}) {
   if (!apiKey) throw new HttpError(503, 'AI is not configured. Add OPENAI_API_KEY to .env and restart the local server, or choose Demo mode.');
   let response;
   try {
